@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       kernel_url:
-        description: 'Kernel github url perf-kernel: https://github.com/pratikkabra143/kernel_xiaomi_courbet.git, classic: https://github.com/pratikkabra143/kernel_xiaomi_sm7150.git, ksun-alfa: , sukisu-alfa: '
+        description: 'Kernel github url perf-kernel: https://github.com/pratikkabra143/kernel_xiaomi_courbet.git, courbet: https://github.com/pratikkabra143/kernel_xiaomi_sm7150.git, ksun: , sukisu: '
         required: true
         default: 'https://github.com/pratikkabra143/kernel_xiaomi_sm7150.git'
         type: string
@@ -16,14 +16,13 @@ on:
       kernel_type:
         description: 'Kernel Type'
         required: true
-        default: 'alfakernel'
-        type: choice
-        options:
-        - 'alfakernel'
-        - 'ksun-alfa'
-        - 'sukisu-alfa'
-        - 'classic'
-        - 'perfkernel'
+        default: 'courbet'
+        type: string
+        # options:
+        # - 'ksun'
+        # - 'sukisu'
+        # - 'courbet'
+        # - 'perfkernel'
       recurse_submodule:
         description: "some kernel source use submodule(true/false)"
         required: true
