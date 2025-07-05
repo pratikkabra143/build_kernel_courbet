@@ -4,36 +4,42 @@ on:
   workflow_dispatch:
     inputs:
       kernel_url:
-        description: 'Kernel github url perf-kernel: https://github.com/pratikkabra143/kernel_xiaomi_courbet.git, alfakernel: https://github.com/pratikkabra143/kernel_xiaomi_sm6150.git'
+        description: 'Kernel github url perf-kernel: https://github.com/pratikkabra143/kernel_xiaomi_courbet.git, classic: https://github.com/pratikkabra143/kernel_xiaomi_sm7150.git, ksun-alfa: , sukisu-alfa: '
         required: true
-        default: 'https://github.com/pratikkabra143/kernel_xiaomi_courbet.git'
+        default: 'https://github.com/pratikkabra143/kernel_xiaomi_sm7150.git'
         type: string
       kernel_branch:
-        description: "github branch like 'perf-ksu-miui'"
+        description: "github branch like 'sixteen'"
         required: true
-        default: 'perf-ksu-miui'
+        default: 'sixteen'
         type: string
       kernel_type:
-        description: 'Kernel Type PerfKernel or AlfaKernel'
+        description: 'Kernel Type'
         required: true
-        default: 'PerfKernel'
-        type: string
+        default: 'alfakernel'
+        type: choice
+        options:
+        - 'alfakernel'
+        - 'ksun-alfa'
+        - 'sukisu-alfa'
+        - 'classic'
+        - 'perfkernel'
       recurse_submodule:
         description: "some kernel source use submodule(true/false)"
         required: true
         default: false
         type: boolean
       is_release:
-        description: 'Kernel Release at github true or false'
+        description: "Kernel Release at github true or false"
         required: true
         default: false
         type: boolean
-
+        
 jobs:
   Build-Kernel:
     strategy:
       fail-fast: false
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     env:
@@ -48,7 +54,7 @@ jobs:
       KERNEL_TYPE: ${{ github.event.inputs.kernel_type }}
       IS_RELEASE: ${{ github.event.inputs.is_release }}
       RECURSE_SUBMODULE: ${{ github.event.inputs.recurse_submodule }}
-      KERNEL_VERSION: 'v0000'
+      KERNEL_VERSION: "4.14.356"
 
     steps:
     - name: Checkout repository
